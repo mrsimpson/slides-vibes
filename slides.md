@@ -19,7 +19,6 @@ mdc: true
 
 ---
 
-
 <style>
 
 /* global styles */
@@ -41,11 +40,11 @@ mdc: true
 .slidev-layout ul {
   padding-top: 2rem;
   list-style: none;
-}
-
-li {
+  
+  & li {
   font-size: 1.5rem;
   padding-bottom: 1.5rem
+  }
 }
 
 </style>
@@ -70,9 +69,7 @@ A quick glance at how producing software
 </ul>
 
 <!--
-
 We don't know wha't coming but we know – like the SpiceGirls sing – things (aka "software development") will never be the same again
-
 -->
 
 ---
@@ -98,7 +95,7 @@ layout: full
 
 ### Hip-Shot-Development
 
-<img src="/bolt_1.png" alt="A whole project"/>
+<img src="/bolt_1.png" alt="A whole project" />
 
 ---
 
@@ -177,7 +174,7 @@ thoughts="<li>The user wants to build a grocery shopping app and is asking for h
   lineHeight="1.2"
 />
 
-<!-- 
+<!--
 Now, we can at least influence what the AI will try to achieve. 
 The documentation created will be usable as context for the subsequent requests.
 -->
@@ -265,5 +262,3 @@ The future of software development is about setting the proper boundaries for ag
 <li>Context</li>
 </v-clicks>
 </ul>
-
----

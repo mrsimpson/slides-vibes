@@ -1,6 +1,7 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue';
 import MarkdownIt from 'markdown-it';
+import { useSlideContext } from '@slidev/client';
 
 // Create markdown-it instance
 const md = new MarkdownIt({
@@ -77,6 +78,9 @@ const renderedMarkdown = computed(() => {
   return md.render(markdownContent.value);
 });
 
+// Get Slidev context to access base path
+const $slidev = useSlideContext();
+
 // Load file content if file prop is provided
 onMounted(async () => {
   if (props.file) {
@@ -84,8 +88,16 @@ onMounted(async () => {
     loadError.value = '';
     
     try {
-      // Fetch the file from the public directory
-      const response = await fetch(props.file);
+      // If the file path already starts with http or https, use it as is
+      // Otherwise, prefix with the Slidev base path
+      const fileUrl = props.file.startsWith('http') 
+        ? props.file 
+        : `${$slidev?.configs?.base || '/'}${props.file.startsWith('/') ? props.file.substring(1) : props.file}`;
+      
+      console.log('Fetching file from:', fileUrl);
+      
+      // Fetch the file from the public directory with the correct base path
+      const response = await fetch(fileUrl);
       
       if (!response.ok) {
         throw new Error(`Failed to load file: ${response.status} ${response.statusText}`);

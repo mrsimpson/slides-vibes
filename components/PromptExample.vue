@@ -1,6 +1,7 @@
 <script setup>
 import { ref, computed } from 'vue';
 import MarkdownIt from 'markdown-it';
+import { useSlideContext } from '@slidev/client';
 
 // Create markdown-it instance
 const md = new MarkdownIt({
@@ -9,6 +10,9 @@ const md = new MarkdownIt({
   typographer: true,
   breaks: true
 });
+
+// Get Slidev context to access base path
+const $slidev = useSlideContext();
 
 // Props to customize the component
 const props = defineProps({
@@ -98,6 +102,17 @@ const processedPrompt = computed(() => {
     return props.prompt.replace(/<br>/g, '\n');
   }
   return props.prompt;
+});
+
+// Process additional content to fix image paths
+const processedAdditionalContent = computed(() => {
+  if (!props.additionalContent) return '';
+  
+  // Replace image src paths to include the base path
+  return props.additionalContent.replace(
+    /src=["']\/([^"']+)["']/g, 
+    (match, path) => `src="${$slidev?.configs?.base || "/"}${path}"`
+  );
 });
 
 // Function to render markdown
@@ -266,7 +281,7 @@ const fontSizeStyle = computed(() => {
            borderColor: containerStyle.additional.border,
            color: containerStyle.additional.text
          }">
-      <div class="content additional" :style="maxHeightStyle" v-html="additionalContent"></div>
+      <div class="content additional" :style="maxHeightStyle" v-html="processedAdditionalContent"></div>
     </div>
     
     <!-- Horizontal layout for left/right positioning -->
@@ -322,7 +337,7 @@ const fontSizeStyle = computed(() => {
              color: containerStyle.additional.text,
              width: contentWidth.additional
            }">
-        <div class="content additional" :style="maxHeightStyle" v-html="additionalContent"></div>
+        <div class="content additional" :style="maxHeightStyle" v-html="processedAdditionalContent"></div>
       </div>
     </div>
     
@@ -376,7 +391,7 @@ const fontSizeStyle = computed(() => {
              borderColor: containerStyle.additional.border,
              color: containerStyle.additional.text
            }">
-        <div class="content additional" :style="maxHeightStyle" v-html="additionalContent"></div>
+        <div class="content additional" :style="maxHeightStyle" v-html="processedAdditionalContent"></div>
       </div>
             
     </template>
