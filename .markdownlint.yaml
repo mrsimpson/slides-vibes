@@ -1,0 +1,5 @@
+# we don't care about line length – this is subject to the editor
+MD013: false
+
+# Allow HTML – needed for custom components too
+MD033: false
