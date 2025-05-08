@@ -22,7 +22,7 @@ mdc: true
 <style>
 
 /* global styles */
-.slidev-layout.quote p {
+.slidev-layout.quote p:first-of-type {
   font-style: italic;
   font-size: 3rem;
   line-height: 5rem;
@@ -30,14 +30,14 @@ mdc: true
 
   &::before, &::after {
     content: '"';
-  }
+  } 
 }
 
 .slidev-vclick-current {
   font-weight: 600;
 }
 
-.slidev-layout ul:not(.markdown-visualizer .rendered ul):not(.prompt-example-container .response ul) {
+.slidev-layout ul:not(.markdown-visualizer .rendered ul):not(.prompt-example-container ul) {
   padding-top: 2rem;
   list-style: none;
   
@@ -73,10 +73,52 @@ We don't know wha't coming but we know – like the SpiceGirls sing – things (
 -->
 
 ---
+layout: quote
+---
+
+<style scoped>
+  h2 {display: none}
+</style>
+
+## Vibe coding - quote 1
+
+It's not really coding - I just see things, **say things, run things, and copy-paste** things, and it **mostly** works.
+
+Andrej Karpathy, OpenAI Co-founder 
+
+---
+layout: quote
+---
+
+<style scoped>
+  h2 {display: none}
+</style>
+
+## Vibe coding - quote 2
+
+AI-assisted coding (including vibe coding, where you might **barely look at the code**) gets you **speed**!
+
+Andrew NG, Founder of DeepLearning.AI
+
+---
+layout: quote
+---
+
+<style scoped>
+  h2 {display: none}
+</style>
+
+## Vibe coding - quote 3
+
+Prompt-Driven-Development, where you produce code with natual language is a lot of fun – until you have to **debug** and **understand** what AI agents did in the meantime. And they are fast!
+
+Oliver Jägle, Software-developer
+
+---
 
 ## bolt.new – an OG of agentic software development
 
-<PromptExample
+<PromptInteraction
   prompt="Build a mobile app that I can use with my wife to do the weekly shopping."
   response="Based on your requirements, I'll create a beautifully designed shopping app for you and your wife to manage your weekly shopping together. The app will focus on collaboration, ease of use, and visual appeal with an Apple-inspired aesthetic."
   aiLabel="bolt.new"
@@ -101,7 +143,7 @@ layout: full
 
 ### Workaholic AI
 
-<PromptExample
+<PromptInteraction
 fontSize="0.8em"
 prompt="I want to build an app for shopping groceries. Before we start with the actual application, I want you to help he shape the requirements in a project design document (PDD)"
 thoughts="<li>The user wants to build a grocery shopping app and is asking for help with creating a Project Design Document (PDD) first. They've provided specific guidelines for how I should respond, emphasizing beautiful design, readability, and proper organization.</p
@@ -167,7 +209,7 @@ thoughts="<li>The user wants to build a grocery shopping app and is asking for h
 <MarkdownVisualizer
   file="/grocery-app-pdd-bolt.md"
   height="400px"
-  sourceTitle="AI generated PDD"
+  sourceTitle="pdd.md"
   renderedTitle="Preview"
   sourceFontSize="0.75em"
   fontSize="0.75em"
@@ -186,7 +228,7 @@ The documentation created will be usable as context for the subsequent requests.
 <MarkdownVisualizer
   file="/grocery-app-user-flows-bolt.md"
   height="400px"
-  sourceTitle="User flows"
+  sourceTitle="user-flows.md"
   renderedTitle="Preview"
   sourceFontSize="0.75em"
   fontSize="0.75em"
@@ -200,7 +242,7 @@ The documentation created will be usable as context for the subsequent requests.
 <MarkdownVisualizer
   file="/grocery-app-wireframes-bolt.md"
   height="400px"
-  sourceTitle="Wireframes"
+  sourceTitle="wireframes.md"
   renderedTitle="Preview"
   sourceFontSize="0.75em"
   fontSize="0.75em"
@@ -214,7 +256,7 @@ The documentation created will be usable as context for the subsequent requests.
 <MarkdownVisualizer
   file="/grocery-app-ta-bolt.md"
   height="400px"
-  sourceTitle="Technical architecture"
+  sourceTitle="technical-architecture.md"
   renderedTitle="Preview"
   sourceFontSize="0.75em"
   fontSize="0.75em"
@@ -257,8 +299,213 @@ The future of software development is about setting the proper boundaries for ag
 <v-clicks>
 <li>Be aware of the agents in our development environment &nbsp; 🤖🤖🤖
 </li>
-<li>User Prompt</li>
 <li>System Prompt</li>
+<li>Project Prompt</li>
+<li>User Prompt</li>
 <li>Context</li>
 </v-clicks>
 </ul>
+
+---
+layout: section
+---
+
+## Step-by-step
+
+A small guidance for 
+<span v-mark="{type: 'strike-through', iterations: 2, strokeWidth: 10, color: 'red', at: 1}">old</span> software developers
+
+---
+layout: two-cols
+---
+
+### Know your agents
+
+![File-agent in cursor](/agent-q.png){width=400px lazy}
+
+<template #right>
+
+![Rag-agent in cursor](/agent-cursor.png){width=400px lazy}
+
+</template>
+
+---
+
+### It's a black box
+
+<svg width="400" height="400" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <rect x="25" y="25" width="400" height="400" fill="black" />
+</svg>
+
+<!--
+
+IDE providers constantly evolve the agents they use as well as the tools they are given.
+
+Those providers determine usage of languages, frameworks, SaaS-offering, ...
+
+Unless you use an open source prompt driven development tool like [bolt.diy](bolt.diy) or – shameless plug – [my very own piddie, WIP](https://github.com/mrsimpson/piddie), you are not going to understand why things happen – or how to optimize for them.
+
+-->
+
+---
+
+### System prompt
+
+- Implicitly included in each interaction
+- Not always modifyable
+- Should contain only very **generic instructions (that always apply)**
+
+<MarkdownVisualizer
+  file="/sample-system-prompt.md"
+  height="150px"
+  sourceTitle="sample-system-prompt.md"
+  renderedTitle="Preview"
+  sourceFontSize="0.75em"
+  fontSize="0.75em"
+  lineHeight="1.2"
+/>
+
+
+---
+
+### Project prompt
+
+- Implicitly included in each interaction
+- Part of your software repository
+- your project: **rules, conventions, structure**
+
+<MarkdownVisualizer
+  file="/sample-project-prompt.md"
+  height="150px"
+  sourceTitle="sample-project-prompt.md"
+  renderedTitle="Preview"
+  sourceFontSize="0.75em"
+  fontSize="0.75em"
+  lineHeight="1.2"
+/>
+
+<!--
+
+Not sure how to best compose those files? Ask your LLM to help you: "Ask me what you need to know in order to provide a good system prompt to an LLM for a software development project"
+
+-->
+
+---
+
+### User prompt
+
+- Instructs the agents what to achieve
+- Prefer exploration over imperative programming
+- Address it like an experienced collegue who's from another project:
+  - Start with the current sitution
+  - Describe the target you want to achieve
+  - Let him know what you already know (no guesses!)
+ 
+**Avoid un-intentional priming!**
+
+<!--
+
+Guessing will prime the LLM. Due to the inference nature of LLMs, they will always start with your assumptions. They act like an amplifier.
+
+-->
+
+---
+
+### Explore!
+
+<PromptInteraction
+  prompt="I want to develop an mobile application which can be used by multiple persons to go shopping.
+Before we start developing it, I want you to help me shape the minimal requirements.
+Ask me what you need to know in order to create a basid pdd."
+  response="I'd be happy to help you shape the minimal requirements for your multi-user shopping mobile application. To create a basic Product Design Document (PDD), I need to understand several key aspects of your vision. Let me ask
+you some essential questions:
+<br/>
+1. Core Purpose: What's the primary problem your shopping app is trying to solve? Is it for shared grocery lists, splitting costs, coordinating purchases, or something else?
+<br/>
+2. Target Users: Who will be using this app? Is it for families, roommates, friends, or another specific group?
+<br/>
+3. Key Features: What are the must-have features for your minimum viable product (MVP)? For example:<br/>
+   • Shared shopping lists?<br/>
+   • Real-time updates?<br/>
+   • User roles/permissions?<br/>
+   • Cost tracking/splitting?<br/>
+<br/>
+4. Platform Requirements: Are you targeting iOS, Android, or both? Any specific device compatibility needs?
+<br/>
+5. User Flow: How do you envision users interacting with the app? For example, creating lists, inviting others, marking items as purchased, etc.
+<br/>
+6. Data Management: What kind of data will need to be stored? Will users need accounts? How will data be shared between users?
+<br/>
+7. Monetization: Do you have plans for monetizing the app (free, subscription, ads, etc.)?
+<br/>
+8. Technical Constraints: Any specific technical requirements or limitations I should be aware of?
+<br/>
+9. Timeline: What's your expected timeline for development?
+<br/>
+10. Success Metrics: How will you measure if the app is successful?
+<br/>
+Once I have your responses to these questions, I can help draft a focused PDD that outlines the minimal requirements for your shopping application."
+/>
+
+---
+
+### Be explicit
+
+<PromptInteraction
+  fontSize="0.7rem"
+  userLabel="A rubber-ducker"
+  prompt="It is meant for groceries. Major objective is that only one person has to go shopping and while doing it can grab items that other persons he elaready knows (friends, family, community) in order to bring it along.
+**Major features:**
+-  multiple persons can edit the same shopping list if both are owners of the list.
+- people of the same community can share their own lists with the group. then, the list becomes visible to the community. While shopping, the shopper can select shared shopping lists for items to bring along. During shopping, these items are merged into one list
+- when going to the checkout desk, the application shall group the shopped items per source shopping list so that the shopper can easily pack them in separate bags.
+Tracking prices and splitting totals is not in scope. It's only about quantities
+In order to fulfill these capabilities, we need
+- Shared shopping lists
+- real time reactive updates
+- basic roles and permissions (communities, list owners, shares)
+- being able to share a list
+CRUD interactions for the list and items are necessary. Additional actions: select bring-along-lists, go shopping, mark items purchased, checkout, end shopping (ending a shopping will move all non-purchased items to a new list).
+**Let's not get into the details of the technical implementation**. Let me know if there are aspects you don't fully understand or which you'd like to elaborate more."
+/>
+
+---
+
+### Move on **only** once you're ready
+
+<PromptInteraction
+  userLabel="A satisfied BA"
+  prompt="Let's move on to the data model. I prefer a relational model"
+  response="<p>I&#39;ll help you create a relational data model for your shopping app. Based on the requirements in your PDD, here&#39;s how we could structure the database..."
+/>
+
+---
+
+### Read(!), discuss ideas, define out of scope
+
+<PromptInteraction
+  userLabel="A critical architect"
+  prompt="ok, let's **not** support conflict resolution now (last edit wins is ok for now), but make the rest of the data model compatible for later enhancement. Document the data model in a file. 
+  Add mermaid based diagrams"
+/>
+
+![](/public/shopping-app-data-model.png){width=400px lazy}
+
+<!--
+
+We all like beautiful diagrams, don't we?
+
+-->
+
+### Pinpoint achievements
+
+<PromptInteraction
+  userLabel="A critical architect"
+  prompt="
+ok, now that we've got all this sketched, I want you to create a comprehensive documentation for developers. I already added an arc42.md file. Fill in all the aspects we already discussed and link to the pdd and the data model for details."
+/>
+
+---
+layout: end
+---
+Have fun!

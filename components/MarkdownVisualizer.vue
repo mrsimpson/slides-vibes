@@ -209,6 +209,12 @@ const sourceStyle = computed(() => {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   border-width: 1px;
   border-style: solid;
+
+  font-size: 0.8rem;
+}
+
+.source-container .header {
+  font-family: 'Courier New', Courier, monospace;
 }
 
 .header {
@@ -259,6 +265,7 @@ const sourceStyle = computed(() => {
 
 /* Ensure the rendered markdown looks good */
 .rendered {
+  padding-top: 0px;
   overflow-y: auto;
 }
 
@@ -269,8 +276,8 @@ const sourceStyle = computed(() => {
   font-weight: bold;
 }
 
-:deep(h1) { font-size: 1.6em; }
-:deep(h2) { font-size: 1.4em; }
+:deep(h1) { font-size: 1.6em; margin-top: 1em;}
+:deep(h2) { font-size: 1.4em}
 :deep(h3) { font-size: 1.2em; }
 :deep(h4) { font-size: 1.1em; }
 :deep(h5), :deep(h6) { font-size: 1em; }
@@ -278,12 +285,22 @@ const sourceStyle = computed(() => {
 :deep(p) {
   margin-bottom: 0.7em;
   margin-top: 0;
+  line-height: 1rem;
+
+  + h2, h3 {
+    margin-top: 1em;
+  }
+
 }
 
 :deep(ul), :deep(ol) {
   margin-bottom: 0.7em;
   margin-top: 0.3em;
   padding-left: 1.5em;
+
+  + h2, h3 {
+    margin-top: 1em;
+  }
 }
 
 :deep(li) {

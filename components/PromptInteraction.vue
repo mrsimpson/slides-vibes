@@ -49,7 +49,7 @@ const props = defineProps({
   },
   promptMarkdown: {
     type: Boolean,
-    default: false
+    default: true
   },
   additionalContent: {
     type: String,
@@ -100,7 +100,8 @@ const processedPrompt = computed(() => {
     // Replace <br> tags with actual line breaks for markdown processing
     return props.prompt.replace(/<br>/g, '\n');
   }
-  return props.prompt;
+  // Support line breaks in non-markdown prompts by replacing \n with <br> for HTML display
+  return props.prompt.replace(/\n/g, '<br>');
 });
 
 // Process additional content to fix image paths
@@ -268,7 +269,7 @@ const fontSizeStyle = computed(() => {
       </div>
       <div v-show="!isPromptCollapsed" class="content prompt" :style="{ color: containerStyle.prompt.text, ...maxHeightStyle }">
         <div v-if="promptMarkdown" v-html="renderMarkdown(processedPrompt)"></div>
-        <template v-else>{{ prompt }}</template>
+        <div v-else v-html="processedPrompt"></div>
       </div>
     </div>
     
@@ -289,7 +290,8 @@ const fontSizeStyle = computed(() => {
          :style="{ flexDirection }">
       
       <!-- Response section in horizontal layout -->
-      <div class="response-container" 
+      <div v-if="response && response.trim() !== ''"
+           class="response-container" 
            :style="{
              backgroundColor: containerStyle.response.bg,
              borderColor: containerStyle.response.border,
@@ -342,8 +344,8 @@ const fontSizeStyle = computed(() => {
     
     <!-- Standard vertical layout for before/after/replace -->
     <template v-if="!useHorizontalLayout">
-      <!-- Response section (skipped if additionalContentPosition is 'replace') -->
-      <div v-if="additionalContentPosition !== 'replace'" 
+      <!-- Response section (skipped if additionalContentPosition is 'replace' or response is empty) -->
+      <div v-if="additionalContentPosition !== 'replace' && response && response.trim() !== ''" 
            class="response-container" 
            :style="{
              backgroundColor: containerStyle.response.bg,
