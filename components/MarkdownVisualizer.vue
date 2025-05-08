@@ -1,7 +1,6 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue';
 import MarkdownIt from 'markdown-it';
-import { useSlideContext } from '@slidev/client';
 
 // Create markdown-it instance
 const md = new MarkdownIt({
@@ -78,8 +77,8 @@ const renderedMarkdown = computed(() => {
   return md.render(markdownContent.value);
 });
 
-// Get Slidev context to access base path
-const $slidev = useSlideContext();
+// Get base path from Vite
+const base = import.meta.env.BASE_URL;
 
 // Load file content if file prop is provided
 onMounted(async () => {
@@ -92,7 +91,7 @@ onMounted(async () => {
       // Otherwise, prefix with the Slidev base path
       const fileUrl = props.file.startsWith('http') 
         ? props.file 
-        : `${$slidev?.configs?.base || '/'}${props.file.startsWith('/') ? props.file.substring(1) : props.file}`;
+        : `${base}${props.file.startsWith('/') ? props.file.substring(1) : props.file}`;
       
       console.log('Fetching file from:', fileUrl);
       

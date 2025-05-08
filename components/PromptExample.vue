@@ -1,7 +1,6 @@
 <script setup>
 import { ref, computed } from 'vue';
 import MarkdownIt from 'markdown-it';
-import { useSlideContext } from '@slidev/client';
 
 // Create markdown-it instance
 const md = new MarkdownIt({
@@ -11,8 +10,8 @@ const md = new MarkdownIt({
   breaks: true
 });
 
-// Get Slidev context to access base path
-const $slidev = useSlideContext();
+// Get base path from Vite
+const base = import.meta.env.BASE_URL;
 
 // Props to customize the component
 const props = defineProps({
@@ -111,7 +110,7 @@ const processedAdditionalContent = computed(() => {
   // Replace image src paths to include the base path
   return props.additionalContent.replace(
     /src=["']\/([^"']+)["']/g, 
-    (match, path) => `src="${$slidev?.configs?.base || "/"}${path}"`
+    (match, path) => `src="${base}${path}"`
   );
 });
 
