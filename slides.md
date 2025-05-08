@@ -37,7 +37,7 @@ mdc: true
   font-weight: 600;
 }
 
-.slidev-layout ul {
+.slidev-layout ul:not(.markdown-visualizer .rendered ul):not(.prompt-example-container .response ul) {
   padding-top: 2rem;
   list-style: none;
   
