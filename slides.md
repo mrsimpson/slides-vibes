@@ -60,15 +60,15 @@ A quick glance at how producing software
 
 <v-switch>
   <template #1>
-  <img src="/evolution-assisted-development.png" alt="Assisted Development" class="h-80" />
+  <img src="/evolution-assisted-development.jpg" alt="Assisted Development" class="h-80" />
   <p>AI assisted coding</p>
   </template>
   <template #2>
-  <img src="/evolution-as-peer.png" alt="As Peer" class="h-80" />
+  <img src="/evolution-as-peer.jpg" alt="As Peer" class="h-80" />
   <p>AI as pair programmer</p>
   </template>
   <template #3>
-  <img src="/evolution-vibe.png" alt="Vibe development" class="h-80" />
+  <img src="/evolution-vibe.jpg" alt="Vibe development" class="h-80" />
   <p>Agentic vibe coding</p>
   </template>
 </v-switch>
@@ -767,6 +767,12 @@ Sometimes, you're reaching a point where you start a new chapter.
 Then, compacting the context and continuing with your explicitly created context documents helps!
 
 -->
+
+---
+layout: full
+---
+
+![islands architecture redefined](/evolution-islands.jpg)
 
 ---
 
