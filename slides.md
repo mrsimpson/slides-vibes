@@ -72,6 +72,7 @@ A quick glance at how producing software
 We don't know wha't coming but we know – like the SpiceGirls sing – things (aka "software development") will never be the same again
 -->
 
+
 ---
 layout: quote
 ---
@@ -416,7 +417,7 @@ Guessing will prime the LLM. Due to the inference nature of LLMs, they will alwa
 <PromptInteraction
   prompt="I want to develop an mobile application which can be used by multiple persons to go shopping.
 Before we start developing it, I want you to help me shape the minimal requirements.
-Ask me what you need to know in order to create a basid pdd."
+Ask me what you need to know in order to create a basic pdd."
   response="I'd be happy to help you shape the minimal requirements for your multi-user shopping mobile application. To create a basic Product Design Document (PDD), I need to understand several key aspects of your vision. Let me ask
 you some essential questions:
 <br/>
@@ -469,6 +470,12 @@ CRUD interactions for the list and items are necessary. Additional actions: sele
 **Let's not get into the details of the technical implementation**. Let me know if there are aspects you don't fully understand or which you'd like to elaborate more."
 />
 
+<!--
+
+[The commit with the Amazon Q based PDD](https://github.com/mrsimpson/prompt-driven-collaborative-shopping/commit/bff5f99f6841002bf4cbdb0b7f12fbecadbc8286)
+
+-->
+
 ---
 
 ### Move on **only** once you're ready
@@ -495,15 +502,68 @@ CRUD interactions for the list and items are necessary. Additional actions: sele
 
 We all like beautiful diagrams, don't we?
 
+[The commit of the data model, written by Amazon Q](https://github.com/mrsimpson/prompt-driven-collaborative-shopping/commit/6004e8268cba4760c1e9f1c4d9d17e0386c713bf)
+
 -->
+
+---
 
 ### Pinpoint achievements
 
 <PromptInteraction
   userLabel="A critical architect"
   prompt="
-ok, now that we've got all this sketched, I want you to create a comprehensive documentation for developers. I already added an arc42.md file. Fill in all the aspects we already discussed and link to the pdd and the data model for details."
+ok, now that we've got all this sketched, I want you to create a comprehensive architecture documentation for developers. I already added an arc42.md file. Fill in all the aspects we already discussed and link to the pdd and the data model for details."
 />
+
+<!--
+
+[The commit with the ARC42 documentation, written by Amazon Q]
+
+-->
+
+---
+
+### Document as-if
+
+<PromptInteraction
+  userLabel="Software developer"
+  prompt="ok, now let's create a comprehensive README wich gives a high level overview of the project.
+  We'll be implementing the app as a react native app.
+  Describe it in the readme **as if it had already been built using react native, expo**. Unit testing with jest. Also describe how to set up supabase and get started locally" />
+
+---
+
+### Be critical and precise
+
+ <PromptInteraction
+  userLabel="Software developer"
+  prompt="the part about supabase is not correct; the policies and so on will be part of the migrations. also, we don't need a supabase account, but can use the supabase cli to develop locally: https://supabase.com/docs/guides/local-development/cli/getting-started" 
+  response="You're absolutely right about the Supabase setup. Let me correct the README to reflect the use of Supabase CLI for local development instead of requiring a Supabase account, and to clarify that policies will be part of migrations." />
+
+---
+
+### Prepare the next steps
+
+  <PromptInteraction
+  userLabel="Software developer"
+  maxHeight="100px"
+  prompt="ok, finally describe that all backend logic which is responsible for consistency resides within supbase. simple functions as plsql database functions, complex functions as deno functions" 
+  response="You're right to emphasize that backend logic for data consistency should reside within Supabase. [...]
+  <br />
+    1. PL/pgSQL Database Functions for simpler operations:
+      • ...
+  <br />
+    2. Deno Edge Functions for more complex operations:
+      • ...
+  <br />
+Would you like me to add this information to one of the documentation files we've created, such as the architecture document or README?"
+/>
+
+<PromptInteraction
+  userLabel="Software developer"
+  prompt="add this to both, the readme (with the description in which folder they live) and to the arc42 (high level)"
+  />
 
 ---
 layout: end
