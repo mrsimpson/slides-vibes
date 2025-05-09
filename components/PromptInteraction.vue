@@ -1,5 +1,6 @@
 <script setup>
 import { ref, computed } from 'vue';
+import { useDarkMode } from '@slidev/client'
 import MarkdownIt from 'markdown-it';
 
 // Create markdown-it instance
@@ -40,7 +41,7 @@ const props = defineProps({
   },
   theme: {
     type: String,
-    default: 'light' // 'light', 'dark', 'terminal'
+    default: useDarkMode().isDark.value ? 'dark' : 'light' // 'light', 'dark', 'terminal'
   },
   responseMarkdown: {
     type: Boolean,

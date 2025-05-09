@@ -374,7 +374,7 @@ Obviously, there are agents with proprietary tools in all the development enviro
 
 ### It's a black box
 
-<svg width="400" height="400" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+<svg width="400" height="400" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
   <rect x="25" y="25" width="400" height="400" fill="black" />
 </svg>
 
@@ -806,6 +806,7 @@ Once we're ready, we can move on to the fun part – but don't get too excited w
   sourceFontSize="0.75em"
   fontSize="0.75em"
   lineHeight="1"
+  :showSource=false
 />
 
 <!--

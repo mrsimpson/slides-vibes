@@ -1,6 +1,7 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue';
 import MarkdownIt from 'markdown-it';
+import { useDarkMode } from '@slidev/client'
 
 // Create markdown-it instance
 const md = new MarkdownIt({
@@ -29,7 +30,7 @@ const props = defineProps({
   // Theme for the component
   theme: {
     type: String,
-    default: 'light' // 'light', 'dark'
+    default: useDarkMode().isDark.value ? 'dark' : 'light'
   },
   // Title for the source section
   sourceTitle: {
@@ -55,6 +56,11 @@ const props = defineProps({
   sourceFontSize: {
     type: String,
     default: '0.9em'
+  },
+  // Whether to display the source window
+  showSource: {
+    type: Boolean,
+    default: true
   }
 });
 
@@ -154,13 +160,14 @@ const sourceStyle = computed(() => {
     fontSize: props.sourceFontSize
   };
 });
+
 </script>
 
 <template>
   <div class="markdown-visualizer" :class="theme">
     <div class="container-wrapper">
       <!-- Source markdown container -->
-      <div class="container source-container" :style="{
+      <div v-if="props.showSource" class="container source-container" :style="{
         backgroundColor: containerStyle.bg,
         borderColor: containerStyle.border
       }">
