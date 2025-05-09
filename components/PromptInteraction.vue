@@ -559,6 +559,11 @@ const fontSizeStyle = computed(() => {
   color: #98c379;
 }
 
+/* Remove additional margins on paragraphs */
+:deep(p) {
+  margin: 0;
+}
+
 /* Image styling */
 :deep(img) {
   max-width: 100%;

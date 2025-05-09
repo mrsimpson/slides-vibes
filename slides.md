@@ -224,6 +224,16 @@ The documentation created will be usable as context for the subsequent requests.
 
 ---
 
+### Image Stacker Demo
+
+<ImageStacker maxHeight="400px">
+  <img src="/bolt_1.png" alt="Bolt Example 1" />
+  <img src="/bolt_2.png" alt="Bolt Example 2" />
+  <img src="/bolt_pdd.png" alt="Bolt PDD Example" />
+</ImageStacker>
+
+---
+
 ### We didn't ask for user flows
 
 <MarkdownVisualizer
@@ -412,6 +422,23 @@ Guessing will prime the LLM. Due to the inference nature of LLMs, they will alwa
 
 ---
 
+### Context!
+
+- Context is crucial to the quality of the result
+- There's no schematic difference between prompts and context content
+- Send relevant information
+- Persist context as documentation!
+
+=> So let's create context. But where to start?
+
+<!--
+
+It's finally the age of the "information developer"
+
+-->
+
+---
+
 ### Explore!
 
 <PromptInteraction
@@ -564,6 +591,123 @@ Would you like me to add this information to one of the documentation files we'v
   userLabel="Software developer"
   prompt="add this to both, the readme (with the description in which folder they live) and to the arc42 (high level)"
   />
+
+---
+
+### Feed the context, keep the knowledge
+
+<style scoped>
+.slidev-code-wrapper {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.slidev-code-wrapper pre {
+  max-height: 100%;
+  overflow-y: auto;
+}
+</style>
+
+```bash
+# for Amazon Q cli
+/context add docs/*.md
+/context add README.md
+
+# 
+/compact
+```
+
+```markdown
+════════════════════════════════════════════════════════════════════════════════
+                       CONVERSATION SUMMARY
+════════════════════════════════════════════════════════════════════════════════
+
+## CONVERSATION SUMMARY
+
+* **Shopping App Concept**: Developed requirements for a collaborative grocery shopping mobile application
+* **Core Features**: Multiple users can edit shopping lists, share lists with communities, merge lists while shopping, and group items by source list at checkout
+* **Data Model**: Created a relational database model with soft-delete functionality
+* **Backend Architecture**: Decided to use Supabase for backend with server-side consistency logic
+* **Documentation**: Created comprehensive documentation including PDD, data model, and architecture documentation
+
+## TOOLS EXECUTED
+
+* **fs_write**: Created ShoppingApp_PDD.md with product design document
+* **fs_write**: Created ShoppingApp_DataModel.md with relational data model and entity relationships
+* **fs_write**: Created arc42.md with comprehensive architecture documentation
+* **fs_write**: Created README.md with project overview and setup instructions
+* **fs_read**: Read existing documentation files to update them
+
+## TECHNICAL INFORMATION
+
+* **Data Model Components**:
+  * Users, Communities, Community_Members tables
+  * Shopping_Lists, List_Owners, List_Items tables
+  * Shopping_Sessions, Session_Lists tables
+  * All tables include soft-delete functionality and audit fields
+
+* **Backend Implementation**:
+  * PL/pgSQL Database Functions for simple operations (timestamps, soft delete, list locking)
+  * Deno Edge Functions for complex operations (shopping sessions, multi-table operations)
+  * Row-Level Security (RLS) policies for access control
+
+* **Frontend Stack**:
+  * React Native with Expo
+  * Dexie.js for local-first storage
+  * Lazy synchronization with Supabase
+
+## KEY INSIGHTS
+
+* Shopping sessions and session lists tables are crucial for tracking active shopping and enabling checkout organization
+* Soft-delete approach preserves data integrity while allowing for apparent deletion
+* Local-first architecture with Dexie.js enables offline functionality
+* "Last edit wins" conflict resolution is sufficient for initial implementation
+* Server-side business logic ensures data consistency across clients
+* Supabase CLI enables local development without requiring a Supabase account
+
+The conversation history has been replaced with this summary.
+It contains all important details from previous interactions.
+```
+
+---
+
+## Go vibing – the responsible way
+
+<PromptInteraction
+  fontSize="0.7rem"
+  prompt="I want to build a collaborative shopping app.
+I already created some documentation I want you to have a look at. you find it in the docs-folder.
+Also, I had some first ideas about the technology I want to use. You find it in the readme.
+Please review all the documents and make an implementation plan which allows us to go step-by-step.
+Create an implementation-plan.md with check boxes we can tick with each step"
+  response="I've created a detailed implementation plan that breaks down the development into 8 phases. Each phase builds upon the previous one, ensuring we maintain a solid foundation while progressively adding more complex features.
+  <br />
+  The plan aligns with the architecture decisions outlined in the arc42 documentation and follows the technical stack specified in the README. It emphasizes:
+  <br />
+  Local-first architecture using Dexie.js
+  Real-time synchronization with Supabase
+  Proper security with Row Level Security
+  Comprehensive testing throughout development
+  Would you like to begin with Phase 1? We can start by setting up the Supabase project and implementing the basic authentication flow."
+/>
+
+---
+
+<MarkdownVisualizer
+  file="/grocery-app-implementation-plan.md"
+  height="400px"
+  sourceTitle="implementation-plan.md"
+  renderedTitle="Preview"
+  sourceFontSize="0.75em"
+  fontSize="0.75em"
+  lineHeight="1"
+/>
+
+<!--
+
+[start vibing in bolt.new](https://bolt.new/github.com/mrsimpson/prompt-driven-collaborative-shopping/)
+
+-->
 
 ---
 layout: end
