@@ -54,19 +54,11 @@ mdc: true
 A quick glance at how producing software
 <span v-mark="{type: 'strike-through', iterations: 4, strokeWidth: 4, color: 'red'}">has changed</span><v-click at=1> has been changing recently and keeps on speeding up.</v-click>
 
-<ul>
-<v-clicks>
-<li>
-1. AI assisted coding
-</li>
-<li>
-2. AI as a peer
-</li>
-<li>
-3. Vibe coding / prompt-driven-development
-</li>
-</v-clicks>
-</ul>
+<v-switch>
+  <template #1><img src="/evolution-assisted-development.png" alt="Assisted Development" class="h-80" /></template>
+  <template #2><img src="/evolution-as-peer.png" alt="As Peer" class="h-80" /></template>
+  <template #3><img src="/evolution-vibe.png" alt="Vibe development" class="h-80" /></template>
+</v-switch>
 
 <!--
 We don't know wha't coming but we know – like the SpiceGirls sing – things (aka "software development") will never be the same again
@@ -221,16 +213,6 @@ thoughts="<li>The user wants to build a grocery shopping app and is asking for h
 Now, we can at least influence what the AI will try to achieve. 
 The documentation created will be usable as context for the subsequent requests.
 -->
-
----
-
-### Image Stacker Demo
-
-<ImageStacker maxHeight="400px">
-  <img src="/bolt_1.png" alt="Bolt Example 1" />
-  <img src="/bolt_2.png" alt="Bolt Example 2" />
-  <img src="/bolt_pdd.png" alt="Bolt PDD Example" />
-</ImageStacker>
 
 ---
 
