@@ -85,6 +85,18 @@ const props = defineProps({
   }
 });
 
+// Copy to clipboard functionality
+const copyToClipboard = (text) => {
+  navigator.clipboard.writeText(text)
+    .then(() => {
+      // Optional: Show a temporary success message or change button state
+      console.log('Content copied to clipboard');
+    })
+    .catch(err => {
+      console.error('Failed to copy: ', err);
+    });
+};
+
 // Process the response to handle <br> tags properly
 const processedResponse = computed(() => {
   if (props.responseMarkdown) {
@@ -262,10 +274,15 @@ const fontSizeStyle = computed(() => {
       backgroundColor: containerStyle.prompt.bg,
       borderColor: containerStyle.prompt.border
     }">
-      <div class="header collapsible" @click="togglePrompt" :style="{ backgroundColor: containerStyle.prompt.header }">
+      <div class="header collapsible" :style="{ backgroundColor: containerStyle.prompt.header }">
         <div class="avatar user">{{ userIcon }}</div>
-        <div class="title">{{ userLabel }}</div>
-        <!-- <div class="toggle-icon">{{ isPromptCollapsed ? '▼' : '▲' }}</div> -->
+        <div class="title" @click="togglePrompt">{{ userLabel }}</div>
+        <div class="copy-button" @click.stop="copyToClipboard(prompt)" title="Copy to clipboard">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+          </svg>
+        </div>
       </div>
       <div v-show="!isPromptCollapsed" class="content prompt" :style="{ color: containerStyle.prompt.text, ...maxHeightStyle }">
         <div v-if="promptMarkdown" v-html="renderMarkdown(processedPrompt)"></div>
@@ -297,10 +314,15 @@ const fontSizeStyle = computed(() => {
              borderColor: containerStyle.response.border,
              width: contentWidth.response
            }">
-        <div class="header collapsible" @click="toggleResponse" :style="{ backgroundColor: containerStyle.response.header }">
+        <div class="header collapsible" :style="{ backgroundColor: containerStyle.response.header }">
           <div class="avatar ai">{{ aiIcon }}</div>
-          <div class="title">{{ aiLabel }}</div>
-          <!-- <div class="toggle-icon">{{ isResponseCollapsed ? '▼' : '▲' }}</div> -->
+          <div class="title" @click="toggleResponse">{{ aiLabel }}</div>
+          <div class="copy-button" @click.stop="copyToClipboard(response)" title="Copy to clipboard">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+          </div>
         </div>
         <div v-show="!isResponseCollapsed" class="content response" :style="{ 
              color: containerStyle.response.text, 
@@ -351,10 +373,15 @@ const fontSizeStyle = computed(() => {
              backgroundColor: containerStyle.response.bg,
              borderColor: containerStyle.response.border
            }">
-        <div class="header collapsible" @click="toggleResponse" :style="{ backgroundColor: containerStyle.response.header }">
+        <div class="header collapsible" :style="{ backgroundColor: containerStyle.response.header }">
           <div class="avatar ai">{{ aiIcon }}</div>
-          <div class="title">{{ aiLabel }}</div>
-          <!-- <div class="toggle-icon">{{ isResponseCollapsed ? '▼' : '▲' }}</div> -->
+          <div class="title" @click="toggleResponse">{{ aiLabel }}</div>
+          <div class="copy-button" @click.stop="copyToClipboard(response)" title="Copy to clipboard">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+          </div>
         </div>
         <div v-show="!isResponseCollapsed" class="content response" :style="{ 
              color: containerStyle.response.text, 
@@ -431,6 +458,7 @@ const fontSizeStyle = computed(() => {
   padding: 0.5rem 1rem;
   font-weight: bold;
   gap: 0.5rem;
+  position: relative;
 }
 
 .collapsible {
@@ -459,8 +487,29 @@ const fontSizeStyle = computed(() => {
   border-radius: 50%;
 }
 
+.copy-button {
+  margin-left: auto;
+  opacity: 0;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  border-radius: 4px;
+}
+
+.header:hover .copy-button {
+  opacity: 0.7;
+}
+
+.copy-button:hover {
+  opacity: 1 !important;
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
 .content {
-  padding: 1rem;
+  padding: 0.5rem;
   overflow-x: auto;
   transition: max-height 0.3s ease-out;
 }
