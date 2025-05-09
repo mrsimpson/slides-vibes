@@ -20,8 +20,7 @@ const props = defineProps({
     required: true
   },
   response: {
-    type: String,
-    required: true
+    type: String
   },
   userIcon: {
     type: String,
