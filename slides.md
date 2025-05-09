@@ -47,6 +47,10 @@ mdc: true
   }
 }
 
+h3 {
+  font-style: italic;
+}
+
 </style>
 
 # Prompt Driven Development
@@ -55,13 +59,22 @@ A quick glance at how producing software
 <span v-mark="{type: 'strike-through', iterations: 4, strokeWidth: 4, color: 'red'}">has changed</span><v-click at=1> has been changing recently and keeps on speeding up.</v-click>
 
 <v-switch>
-  <template #1><img src="/evolution-assisted-development.png" alt="Assisted Development" class="h-80" /></template>
-  <template #2><img src="/evolution-as-peer.png" alt="As Peer" class="h-80" /></template>
-  <template #3><img src="/evolution-vibe.png" alt="Vibe development" class="h-80" /></template>
+  <template #1>
+  <img src="/evolution-assisted-development.png" alt="Assisted Development" class="h-80" />
+  <p>AI assisted coding</p>
+  </template>
+  <template #2>
+  <img src="/evolution-as-peer.png" alt="As Peer" class="h-80" />
+  <p>AI as pair programmer</p>
+  </template>
+  <template #3>
+  <img src="/evolution-vibe.png" alt="Vibe development" class="h-80" />
+  <p>Agentic vibe coding</p>
+  </template>
 </v-switch>
 
 <!--
-We don't know wha't coming but we know – like the SpiceGirls sing – things (aka "software development") will never be the same again
+We don't know what's coming, but we know – like the SpiceGirls sing – things (aka "software development") will never be the same again
 -->
 
 
@@ -132,6 +145,16 @@ layout: full
 
 <img src="/bolt_1.png" alt="A whole project" />
 
+<!--
+
+It's crazy: How can such a lot of stuff have been done in such a short amount of time?
+
+It looks impressive at first, but there's a lot of features in there we didn't ask for. Or we wanted to pick other tools.
+
+Let's try to slow things down a bit and start with the requirements
+
+-->
+
 ---
 
 ### Workaholic AI
@@ -193,6 +216,9 @@ thoughts="<li>The user wants to build a grocery shopping app and is asking for h
 
 <!--
 [project](https://bolt.new/~/sb1-21tkywal)
+
+Now, it's only creating documentation, but it's still over-achieving:
+
 -->
 
 ---
@@ -278,11 +304,19 @@ It's agentic 🦾🛠️
 </v-clicks>
 </ul>
 
+<!--
+
+So let's see whether we can tame it.
+
+-->
+
 ---
 layout: quote
 ---
 
-The future of software development is about setting the proper boundaries for agentic systems
+The future of software development is about **setting the proper boundaries** for agentic systems
+
+A desparate software developer after debugging and reading what bolt.new generated code for an hour
 
 ---
 
@@ -308,6 +342,14 @@ layout: section
 A small guidance for 
 <span v-mark="{type: 'strike-through', iterations: 2, strokeWidth: 10, color: 'red', at: 1}">old</span> software developers
 
+<!--
+
+This is all not rocket science and there are different "methodologies" for prompt-engineering.
+
+I just share with you what works for me and what I found useful, being a software engineer who wants to remain a software engineer for the next years to come.
+
+-->
+
 ---
 layout: two-cols
 ---
@@ -321,6 +363,12 @@ layout: two-cols
 ![Rag-agent in cursor](/agent-cursor.png){width=400px lazy}
 
 </template>
+
+<!--
+
+Obviously, there are agents with proprietary tools in all the development environments. But what can they do?
+
+-->
 
 ---
 
@@ -344,7 +392,7 @@ Unless you use an open source prompt driven development tool like [bolt.diy](bol
 
 ### System prompt
 
-- Implicitly included in each interaction
+- **Implicitly** included in each interaction
 - Not always modifyable
 - Should contain only very **generic instructions (that always apply)**
 
@@ -358,13 +406,18 @@ Unless you use an open source prompt driven development tool like [bolt.diy](bol
   lineHeight="1.2"
 />
 
+<!--
+
+Even if the application allows us to define the system prompt, when using closed source software, we can never be sure that there's no additional content being added to it.
+
+-->
 
 ---
 
 ### Project prompt
 
-- Implicitly included in each interaction
-- Part of your software repository
+- **Explictly** included in each interaction
+- Part of your software **repository**
 - your project: **rules, conventions, structure**
 
 <MarkdownVisualizer
@@ -379,7 +432,9 @@ Unless you use an open source prompt driven development tool like [bolt.diy](bol
 
 <!--
 
-Not sure how to best compose those files? Ask your LLM to help you: "Ask me what you need to know in order to provide a good system prompt to an LLM for a software development project"
+Not sure how to best compose those files? Ask your LLM to help you: 
+
+"Ask me what you need to know in order to provide a good system prompt to an LLM for a software development project"
 
 -->
 
@@ -387,9 +442,9 @@ Not sure how to best compose those files? Ask your LLM to help you: "Ask me what
 
 ### User prompt
 
-- Instructs the agents what to achieve
-- Prefer exploration over imperative programming
-- Address it like an experienced collegue who's from another project:
+- Instructs the agents **what to achieve**
+- Prefer **exploration** over imperative programming
+- Address it **like an experienced collegue** who's from another project:
   - Start with the current sitution
   - Describe the target you want to achieve
   - Let him know what you already know (no guesses!)
@@ -398,7 +453,11 @@ Not sure how to best compose those files? Ask your LLM to help you: "Ask me what
 
 <!--
 
-Guessing will prime the LLM. Due to the inference nature of LLMs, they will always start with your assumptions. They act like an amplifier.
+Guessing will prime the LLM. 
+
+Due to the inference nature of LLMs, they will always start with your assumptions. 
+
+They act like an amplifier.
 
 -->
 
@@ -406,16 +465,21 @@ Guessing will prime the LLM. Due to the inference nature of LLMs, they will alwa
 
 ### Context!
 
-- Context is crucial to the quality of the result
+- Context is **crucial** to the quality of the result
 - There's no schematic difference between prompts and context content
-- Send relevant information
-- Persist context as documentation!
+- Send **relevant** information
+- Persist context as **documentation**!
 
 => So let's create context. But where to start?
 
 <!--
 
-It's finally the age of the "information developer"
+It's finally the age of the "information developer" – or team up with the LLM to take on multiple roles.
+
+- Business Engineer
+- Architect
+- Softare developer
+- ...
 
 -->
 
@@ -457,6 +521,14 @@ you some essential questions:
 Once I have your responses to these questions, I can help draft a focused PDD that outlines the minimal requirements for your shopping application."
 />
 
+<!--
+
+Apply "inversion of control".
+
+This will turn it into a rubber-ducking session which will help you shape your thoughts!
+
+-->
+
 ---
 
 ### Be explicit
@@ -481,6 +553,8 @@ CRUD interactions for the list and items are necessary. Additional actions: sele
 
 <!--
 
+It's not that we're not developing, it's the very opposite! We're just not coding, but we shape our software-to-be.
+
 [The commit with the Amazon Q based PDD](https://github.com/mrsimpson/prompt-driven-collaborative-shopping/commit/bff5f99f6841002bf4cbdb0b7f12fbecadbc8286)
 
 -->
@@ -490,10 +564,18 @@ CRUD interactions for the list and items are necessary. Additional actions: sele
 ### Move on **only** once you're ready
 
 <PromptInteraction
-  userLabel="A satisfied BA"
+  userLabel="A satisfied business engineers"
   prompt="Let's move on to the data model. I prefer a relational model"
   response="<p>I&#39;ll help you create a relational data model for your shopping app. Based on the requirements in your PDD, here&#39;s how we could structure the database..."
 />
+
+<!--
+
+Most important: **Read**! Iteratively adapt. 
+
+Check the final version and move on to the next stage of the SLDC only once you're really confident.
+
+-->
 
 ---
 
@@ -509,7 +591,11 @@ CRUD interactions for the list and items are necessary. Additional actions: sele
 
 <!--
 
-We all like beautiful diagrams, don't we?
+We all like beautiful diagrams, don't we? 
+
+They don't only look appealing, they will help us understand what the AI will get to know later. 
+
+If we don't do this, it's all a matter of machine-heuristics.
 
 [The commit of the data model, written by Amazon Q](https://github.com/mrsimpson/prompt-driven-collaborative-shopping/commit/6004e8268cba4760c1e9f1c4d9d17e0386c713bf)
 
@@ -527,7 +613,13 @@ ok, now that we've got all this sketched, I want you to create a comprehensive a
 
 <!--
 
-[The commit with the ARC42 documentation, written by Amazon Q]
+There are established formats that are easier to consume for you as an experienced developer. Make the AI use them!
+
+Provide a template, which often includes comments how to use it.
+
+Make sure you're still in the context of your session (!), then ask the LLM to pin down what it understood so far.
+
+[The commit with the ARC42 documentation, written by Amazon Q](https://github.com/mrsimpson/prompt-driven-collaborative-shopping/commit/0ca78fb2aa1945dcad8aa5d918cdf1fadb3580d1)
 
 -->
 
@@ -541,6 +633,14 @@ ok, now that we've got all this sketched, I want you to create a comprehensive a
   We'll be implementing the app as a react native app.
   Describe it in the readme **as if it had already been built using react native, expo**. Unit testing with jest. Also describe how to set up supabase and get started locally" />
 
+<!--
+
+Sometimes, we want to test out variations (e. g. of frameworks which we use). We just want to see how this would integrate.
+
+With LLMs, we can easily simulate options!
+
+-->
+
 ---
 
 ### Be critical and precise
@@ -549,6 +649,15 @@ ok, now that we've got all this sketched, I want you to create a comprehensive a
   userLabel="Software developer"
   prompt="the part about supabase is not correct; the policies and so on will be part of the migrations. also, we don't need a supabase account, but can use the supabase cli to develop locally: https://supabase.com/docs/guides/local-development/cli/getting-started" 
   response="You're absolutely right about the Supabase setup. Let me correct the README to reflect the use of Supabase CLI for local development instead of requiring a Supabase account, and to clarify that policies will be part of migrations." />
+
+<!--
+
+Avoid confirmation-click-raids. If there's only a small aspect you don't agree with, change it.
+
+Or – most of the times better – ask the LLM what the purpose of something you disagree with is.
+This will prevent priming!
+
+-->
 
 ---
 
@@ -651,6 +760,14 @@ The conversation history has been replaced with this summary.
 It contains all important details from previous interactions.
 ```
 
+<!---
+
+Sometimes, you're reaching a point where you start a new chapter. 
+
+Then, compacting the context and continuing with your explicitly created context documents helps!
+
+-->
+
 ---
 
 ## Go vibing – the responsible way
@@ -672,6 +789,12 @@ Create an implementation-plan.md with check boxes we can tick with each step"
   Comprehensive testing throughout development
   Would you like to begin with Phase 1? We can start by setting up the Supabase project and implementing the basic authentication flow."
 />
+
+<!--
+
+Once we're ready, we can move on to the fun part – but don't get too excited with too huge steps!
+
+-->
 
 ---
 

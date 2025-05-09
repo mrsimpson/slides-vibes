@@ -510,6 +510,7 @@ const fontSizeStyle = computed(() => {
 .content {
   padding: 0.5rem;
   overflow-x: auto;
+  font-style: italic;
   transition: max-height 0.3s ease-out;
 }
 
