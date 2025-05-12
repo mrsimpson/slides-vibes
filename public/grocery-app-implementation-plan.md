@@ -1,88 +1,177 @@
 # Shopping Companion App - Implementation Plan
 
-## Phase 1: Project Setup and Authentication
-- [ ] Set up Supabase project and configure environment
-- [ ] Create initial database schema with user authentication
-- [ ] Implement user registration and login screens
-- [ ] Add profile management functionality
-- [ ] Set up offline storage with Dexie.js
-- [ ] Implement basic data synchronization
+## Phase 1: Local-First Foundation
+• [ ] 1.1 Setup Project Structure
+  • [ ] Configure project directories and files
+  • [ ] Set up TypeScript configuration
+  • [ ] Configure ESLint and Prettier
 
-## Phase 2: Shopping List Management
-- [ ] Create shopping list database tables and RLS policies
-- [ ] Implement list creation and editing
-- [ ] Add item management to lists
-- [ ] Create list sharing functionality
-- [ ] Implement real-time updates for shared lists
-- [ ] Add offline support for list management
+• [ ] 1.2 Create Core Domain Models
+  • [ ] Define TypeScript interfaces for all entities (User, ShoppingList, ListItem, etc.)
+  • [ ] Implement data validation utilities
+  • [ ] Create type definitions for all operations
 
-## Phase 3: Community Features
-- [ ] Create community database schema
-- [ ] Implement community creation and management
-- [ ] Add member management functionality
-- [ ] Create list sharing within communities
-- [ ] Implement community-level permissions
-- [ ] Add real-time updates for community activities
+• [ ] 1.3 Implement Local Storage with Dexie.js
+  • [ ] Set up Dexie.js database schema
+  • [ ] Create database initialization logic
+  • [ ] Implement basic CRUD operations for all entities
+  • [ ] Add soft-delete functionality
 
-## Phase 4: Shopping Mode
-- [ ] Implement shopping session management
-- [ ] Create list locking mechanism
-- [ ] Add multi-list selection for shopping
-- [ ] Implement item aggregation across lists
-- [ ] Create purchase tracking functionality
-- [ ] Add checkout view with list grouping
+• [ ] 1.4 Create Business Logic Layer
+  • [ ] Implement service interfaces for all domain operations
+  • [ ] Create local-only implementations of these services
+  • [ ] Add shopping session management logic
+  • [ ] Implement list locking mechanism
 
-## Phase 5: Offline and Sync
-- [ ] Enhance offline capabilities
-- [ ] Implement robust data synchronization
-- [ ] Add conflict resolution
-- [ ] Implement background sync
-- [ ] Add sync status indicators
-- [ ] Create data recovery mechanisms
+## Phase 2: Basic UI Implementation
+• [ ] 2.1 Set Up Navigation
+  • [ ] Configure Expo Router
+  • [ ] Create main navigation structure
+  • [ ] Implement authentication flow screens (placeholder)
 
-## Phase 6: UI/UX Enhancement
-- [ ] Implement loading states and error handling
-- [ ] Add animations and transitions
-- [ ] Enhance accessibility
-- [ ] Implement responsive design
-- [ ] Add gesture controls
-- [ ] Create user onboarding flow
+• [ ] 2.2 Implement List Management Screens
+  • [ ] Create list overview screen
+  • [ ] Implement list creation/editing screens
+  • [ ] Build list item management UI
+  • [ ] Add list sharing UI (local-only placeholder)
 
-## Phase 7: Testing and Optimization
-- [ ] Write unit tests
-- [ ] Implement integration tests
-- [ ] Add end-to-end tests
-- [ ] Perform performance optimization
-- [ ] Implement error tracking
-- [ ] Add analytics
+• [ ] 2.3 Develop Shopping Mode UI
+  • [ ] Create shopping mode entry screen with list selection
+  • [ ] Implement consolidated shopping view
+  • [ ] Build checkout view with items grouped by source list
+  • [ ] Add shopping session completion flow
 
-## Phase 8: Deployment and Documentation
-- [ ] Set up CI/CD pipeline
-- [ ] Create production environment
-- [ ] Write user documentation
-- [ ] Create API documentation
-- [ ] Implement monitoring
-- [ ] Create backup strategy
+• [ ] 2.4 Create User Management UI
+  • [ ] Implement user profile screen
+  • [ ] Create community management placeholder screens
+  • [ ] Build settings screen
 
-Each phase builds upon the previous one, ensuring a solid foundation before adding more complex features. The plan follows these key principles:
+## Phase 3: State Management & Local Data Flow
+• [ ] 3.1 Implement Context Providers
+  • [ ] Create authentication context
+  • [ ] Implement shopping list context
+  • [ ] Add shopping session context
+  • [ ] Build community context
 
-1. **Database First**: Each feature starts with proper database schema and security setup
-2. **Offline Support**: Built-in from the beginning, not added as an afterthought
-3. **Security**: RLS policies and proper authentication implemented early
-4. **Testing**: Integrated throughout development, not just at the end
-5. **User Experience**: Focus on core functionality first, then enhance with animations and polish
+• [ ] 3.2 Connect UI to Local Storage
+  • [ ] Wire up list management screens to Dexie.js
+  • [ ] Connect shopping mode to local storage
+  • [ ] Implement local user management
 
-### Getting Started
+• [ ] 3.3 Add Offline Capabilities
+  • [ ] Implement local UUID generation
+  • [ ] Add timestamp management for local changes
+  • [ ] Create local notification system for actions
 
-To begin implementation:
+## Phase 4: Supabase Integration
+• [ ] 4.1 Set Up Supabase Client
+  • [ ] Configure Supabase connection
+  • [ ] Implement authentication with Supabase
+  • [ ] Create basic database schema
 
-1. Review the current phase's tasks
-2. Create necessary database migrations
-3. Implement backend functionality
-4. Build frontend components
-5. Add tests
-6. Document changes
+• [ ] 4.2 Create Repository Layer
+  • [ ] Implement repository interfaces matching service interfaces
+  • [ ] Create Supabase implementations of repositories
+  • [ ] Add factory methods to switch between local and remote repositories
 
-Mark tasks as completed by adding an 'x' between the brackets:
-- [x] Completed task
-- [ ] Pending task
+• [ ] 4.3 Implement Synchronization
+  • [ ] Create sync manager service
+  • [ ] Implement outgoing change queue
+  • [ ] Add conflict detection logic
+  • [ ] Implement "last edit wins" resolution strategy
+
+• [ ] 4.4 Add Real-time Updates
+  • [ ] Configure Supabase real-time subscriptions
+  • [ ] Implement handlers for incoming changes
+  • [ ] Add UI notifications for remote changes
+
+## Phase 5: Advanced Features
+• [ ] 5.1 Implement Multi-user Collaboration
+  • [ ] Add list sharing functionality
+  • [ ] Implement community features
+  • [ ] Create user invitation system
+
+• [ ] 5.2 Add Security Policies
+  • [ ] Implement Row-Level Security policies in Supabase
+  • [ ] Add client-side permission checks
+  • [ ] Create secure sharing mechanisms
+
+• [ ] 5.3 Enhance Shopping Experience
+  • [ ] Implement item aggregation across lists
+  • [ ] Add checkout organization features
+  • [ ] Create shopping history view
+
+• [ ] 5.4 Optimize Performance
+  • [ ] Implement lazy loading for lists
+  • [ ] Add caching strategies
+  • [ ] Optimize synchronization for large datasets
+
+## Phase 6: Testing & Refinement
+• [ ] 6.1 Implement Unit Tests
+  • [ ] Create tests for service layer
+  • [ ] Test repository implementations
+  • [ ] Add tests for synchronization logic
+
+• [ ] 6.2 Add Integration Tests
+  • [ ] Test UI components
+  • [ ] Create end-to-end tests for key flows
+  • [ ] Test offline capabilities
+
+• [ ] 6.3 Perform User Testing
+  • [ ] Conduct usability testing
+  • [ ] Gather feedback on core workflows
+  • [ ] Identify and fix usability issues
+
+• [ ] 6.4 Final Refinements
+  • [ ] Address feedback from testing
+  • [ ] Optimize performance bottlenecks
+  • [ ] Prepare for production deployment
+
+## Implementation Approach
+
+### Business-Oriented Interfaces
+To ensure we can swap out the database layer, we'll create:
+
+1. Service Interfaces: Define business operations without implementation details
+
+typescript
+   interface ShoppingListService {
+     createList(name: string, description: string): Promise<ShoppingList>;
+     addItemToList(listId: string, item: ListItem): Promise<ListItem>;
+     shareList(listId: string, userId: string): Promise<void>;
+     // etc.
+   }
+
+
+
+2. Repository Interfaces: Create data access interfaces that service implementations will use
+  typescript
+   interface ShoppingListRepository {
+     findById(id: string): Promise<ShoppingList | null>;
+     save(list: ShoppingList): Promise<ShoppingList>;
+     delete(id: string): Promise<void>;
+     // etc.
+   }
+
+
+3. Implementation Factories: Create factory functions to switch between implementations
+
+typescript
+   function createShoppingListService(
+     mode: 'local' | 'remote' | 'hybrid'
+   ): ShoppingListService {
+     switch (mode) {
+       case 'local': return new LocalShoppingListService(/* dependencies */);
+       case 'remote': return new RemoteShoppingListService(/* dependencies */);
+       case 'hybrid': return new HybridShoppingListService(/* dependencies */);
+     }
+   }
+
+
+
+### Local-First Development Flow
+1. Start with local-only implementations using Dexie.js
+2. Build UI components against service interfaces
+3. Add Supabase implementations of repositories
+4. Implement synchronization logic
+5. Gradually add backend features while maintaining local functionality
