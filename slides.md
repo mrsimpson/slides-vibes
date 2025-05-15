@@ -840,34 +840,52 @@ graph LR
     B --> C[Prototyping]
     C --> D[Architecture]
     D --> E[Design]
-    E --> F[Implementation]
-    F --> G[Testing]
-    G --> H[Deployment]
-    H --> I[Maintenance]
     
     A1[Product Owner<br>Business Analyst] -.- A
     B1[Business Analyst<br>Requirements Engineer] -.- B
     C1[UX Designer<br>Product Designer] -.- C
     D1[Solution Architect<br>Technical Lead] -.- D
     E1[UI Designer<br>System Designer] -.- E
-    F1[Software Developer<br>Engineer] -.- F
-    G1[QA Engineer<br>Test Analyst] -.- G
-    H1[DevOps Engineer<br>Release Manager] -.- H
-    I1[Support Engineer<br>Maintenance Developer] -.- I
     
     A2["Help me brainstorm innovative<br>solutions for [problem space].<br>Consider market trends and<br>user pain points."] -.- A1
     B2["Create user stories as:<br>'As a [role], I want [goal]<br>so that [benefit]'.<br>Include acceptance criteria."] -.- B1
     C2["Describe a wireframe for<br>the [feature] screen with<br>key UI elements and<br>user interactions."] -.- C1
     D2["Help shape components using<br>DDD methodologies. Describe<br>components in C4 model's<br>first three layers."] -.- D1
     E2["Design TypeScript interfaces<br>for components. Avoid optional<br>parameters, prefer<br>dedicated methods."] -.- E1
+    
+    class A,B,C,D,E phaseStyle;
+    class A1,B1,C1,D1,E1 roleStyle;
+    class A2,B2,C2,D2,E2 promptStyle;
+```
+
+---
+
+### Jack-of-all-trades – 10x your ... role II
+
+```mermaid
+graph LR
+    classDef roleStyle fill:#f9f9f9,stroke:#333,stroke-width:1px;
+    classDef phaseStyle fill:#e1f5fe,stroke:#01579b,stroke-width:2px,color:#01579b;
+    classDef promptStyle fill:#f5f5f5,stroke:#9e9e9e,stroke-width:1px,color:#616161,font-style:italic,font-size:9px,rx:10,ry:10;
+    
+    E[Design] --> F[Implementation]
+    F --> G[Testing]
+    G --> H[Deployment]
+    H --> I[Maintenance]
+    
+    F1[Software Developer<br>Engineer] -.- F
+    G1[QA Engineer<br>Test Analyst] -.- G
+    H1[DevOps Engineer<br>Release Manager] -.- H
+    I1[Support Engineer<br>Maintenance Developer] -.- I
+    
     F2["Implement [component] that<br>handles [functionality] using<br>[framework]. Include error<br>handling and comments."] -.- F1
     G2["Generate Jest unit tests<br>for [component]. Include<br>happy path, edge cases,<br>and error conditions."] -.- G1
     H2["Create a GitHub Actions<br>workflow to build, test,<br>and deploy to [target].<br>Include security scanning."] -.- H1
     I2["Analyze this error log<br>and identify root cause.<br>Suggest debugging steps<br>and potential fixes."] -.- I1
     
-    class A,B,C,D,E,F,G,H,I phaseStyle;
-    class A1,B1,C1,D1,E1,F1,G1,H1,I1 roleStyle;
-    class A2,B2,C2,D2,E2,F2,G2,H2,I2 promptStyle;
+    class F,G,H,I phaseStyle;
+    class F1,G1,H1,I1 roleStyle;
+    class F2,G2,H2,I2 promptStyle;
 ```
 
 ---
