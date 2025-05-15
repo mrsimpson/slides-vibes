@@ -484,6 +484,15 @@ It's finally the age of the "information developer" – or team up with the LLM 
 -->
 
 ---
+layout: section
+---
+
+From Vibe-Coding to prompt-driven-development
+
+![Developer accompanied by bound robots](/evolution-pdd.jpg){class="h-100 mx-auto"}
+
+
+---
 
 ### Explore!
 
