@@ -499,8 +499,8 @@ From Vibe-Coding to prompt-driven-development
 <PromptInteraction
   prompt="I want to develop an mobile application which can be used by multiple persons to go shopping.
 Before we start developing it, I want you to help me shape the minimal requirements.
-Ask me what you need to know in order to create a basic pdd."
-  response="I'd be happy to help you shape the minimal requirements for your multi-user shopping mobile application. To create a basic Product Design Document (PDD), I need to understand several key aspects of your vision. Let me ask
+Ask me what you need to know in order to create a basic prd."
+  response="I'd be happy to help you shape the minimal requirements for your multi-user shopping mobile application. To create a basic Product Design Requirements Document (PRD), I need to understand several key aspects of your vision. Let me ask
 you some essential questions:
 <br/>
 1. Core Purpose: What's the primary problem your shopping app is trying to solve? Is it for shared grocery lists, splitting costs, coordinating purchases, or something else?
